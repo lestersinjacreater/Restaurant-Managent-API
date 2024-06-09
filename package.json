@@ -1,26 +1,24 @@
 {
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "gen":"drizzle-kit generate",
-    "migrate" : " tsx src/drizzle/migrate.ts",
-    "studio" : "drizzle-kit studio",
+    "gen": "drizzle-kit generate",
+    "migrate": " tsx src/drizzle/migrate.ts",
+    "studio": "drizzle-kit studio",
     "push": " drizzle-kit generate && tsx src/drizzle/migrate.ts"
-    
-  
   },
   "dependencies": {
     "@hono/node-server": "^1.11.2",
-    "hono": "^4.4.2",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.31.0",
-    "pg": "^8.11.5"
+    "hono": "^4.4.2",
+    "pg": "^8.11.5",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "@types/node": "^20.11.17",
-    "tsx": "^4.7.1",
     "drizzle-kit": "^0.22.1",
-    "typescript": "^5.4.5",
-    "@faker-js/faker": "^8.4.1"
-    
+    "tsx": "^4.7.1",
+    "typescript": "^5.4.5"
   }
 }
