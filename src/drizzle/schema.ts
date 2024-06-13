@@ -391,7 +391,7 @@ export const roleEnum = pgEnum("role", ["admin", "user"])
 
 export const AuthOnUsersTable = pgTable("auth_on_users", {
   id: serial("id").primaryKey(),
-  userId: integer("user_id").notNull().references(() => UsersTable.user_id, { onDelete: "cascade" }),
+  user_Id: integer("user_id").notNull().references(() => UsersTable.user_id, { onDelete: "cascade" }),
   password: varchar("password", { length: 100 }),
   username: varchar("username", { length: 100 }),
   role: roleEnum("role").default("user")
@@ -399,7 +399,7 @@ export const AuthOnUsersTable = pgTable("auth_on_users", {
 
 export const AuthOnUsersRelations = relations(AuthOnUsersTable, ({ one }) => ({
   user: one(UsersTable, {
-      fields: [AuthOnUsersTable.userId],
+      fields: [AuthOnUsersTable.user_Id],
       references: [UsersTable.user_id]
   })
 }));

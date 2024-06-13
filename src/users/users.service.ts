@@ -33,3 +33,22 @@ export const deleteUserByIdService = async (id: number) => {
   return "User deleted successfully"; // Returning success message
 }
 //
+
+
+
+
+
+
+
+
+
+
+
+//export const //getCityRestaurantsService = async (id: number) => {
+  //return await db.query.CityTable.findFirst({
+    //where: eq(CityTable.city_id, id),
+    //with: {
+      //restaurants: true
+    //}
+  //});
+//}

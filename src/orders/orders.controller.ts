@@ -1,5 +1,5 @@
 import { Context } from "hono";
-import {getOrdersService,getOrderByIdService,createOrderService,updateOrderByidService,deleteOrderByIdService } from "./orders.service";
+import {getOrdersService,getOrderByIdService,createOrderService,updateOrderByidService,deleteOrderByIdService,getOrdersByRestaurantIdService } from "./orders.service";
 
 //get all orders
 export const getOrdersController = async (c: Context) => {
@@ -72,6 +72,21 @@ export const deleteOrderController = async (c: Context) => {
         if (!order) return c.text("Order not found", 404);
         await deleteOrderByIdService(id);
         return c.text("Order deleted successfully", 200);
+    } catch (error: any) {
+        return c.json({ error: error?.message }, 500);
+    }
+};
+
+//get orders by restaurant id
+export const getOrdersByRestaurantIdController = async (c: Context) => {
+    try {
+        const id = parseInt(c.req.param("id"));
+        if (isNaN(id)) return c.text("Invalid id", 400);
+        const orders = await getOrdersByRestaurantIdService(id);
+        if (orders == null || orders.length == 0) {
+            return c.text("No order found", 404);
+        }
+        return c.json(orders, 200);
     } catch (error: any) {
         return c.json({ error: error?.message }, 500);
     }

@@ -37,3 +37,10 @@ export const createOrderService = async (order: TIOrders & { estimatedDeliveryTi
   await db.insert(OrdersTable).values({ ...order, estimated_delivery_time: order.estimatedDeliveryTime, actual_delivery_time: order.actualDeliveryTime }); // Inserting the new order into the database
   return "Order created successfully"; // Returning success message
 }
+
+//function to get orders by restaurant id
+export const getOrdersByRestaurantIdService = async (id: number): Promise<TSOrders[] | null> => {
+  return await db.query.OrdersTable.findMany({
+    where: eq(OrdersTable.restaurant_id, id)
+  });
+}

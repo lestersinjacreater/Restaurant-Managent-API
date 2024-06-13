@@ -102,6 +102,55 @@ Content-Type: application/json
 }
 
 
+####register a user
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+ "user_Id": 63,
+ "password": "1234",
+ "username": "lester sinja",
+ "role": "admin"
+
+  
+  }
+
+###register a user
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+ "user_Id": 63,
+ "password": "1234",
+ "username": "lester sinja",
+  "role": "user"
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###login a user
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "lester sinja",
+  "password": "1234"
+}
+
+
 
 
 //4Adresss
@@ -286,6 +335,11 @@ Content-Type: application/json
 
 ### delete order by id
 DELETE http://localhost:3000/api/orders/34
+
+
+#### get orders by restaurant id
+GET http://localhost:3000/api/orders/restaurant/7
+
 
 
 

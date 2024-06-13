@@ -1,6 +1,6 @@
 import{Hono} from 'hono';
 import { zValidator } from '@hono/zod-validator';
-import {getOrdersController,getOrderByIdController,createOrderController,updateOrderController,deleteOrderController} from './orders.controller';
+import {getOrdersController,getOrderByIdController,createOrderController,updateOrderController,deleteOrderController,getOrdersByRestaurantIdController} from './orders.controller';
 export const ordersRouter = new Hono();
 import { OrdersValidator } from '../validator';
 
@@ -17,6 +17,7 @@ ordersRouter.put('/orders/:id', zValidator('json',OrdersValidator, (result, c) =
     }
 }),updateOrderController);
 ordersRouter.delete('/orders/:id',deleteOrderController);
+ordersRouter.get('/orders/restaurant/:id',getOrdersByRestaurantIdController);
 
 
 

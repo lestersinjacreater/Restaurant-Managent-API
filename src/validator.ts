@@ -153,7 +153,7 @@ export const StatusCatalogValidator = z.object({
 });
 
 export const registerUserValidator = z.object({
-  userId: z.number().optional(),
+  user_Id: z.number().optional(),
   username: z.string().optional(),
   password: z.string().optional(),
   role: z.string().optional(),
