@@ -1,11 +1,13 @@
 import{Hono} from 'hono';
+import { zValidator } from '@hono/zod-validator';
 import {getStatusCatalogController,getStatusCatalogByIdController,createStatusCatalogController,updateStatusCatalogController,deleteStatusCatalogController} from './statsuscatalog.controller';
 export const statsuscatalogRouter = new Hono();
+import { StatusCatalogValidator } from '../validator';
 
 statsuscatalogRouter.get('/statuscatalog',getStatusCatalogController);
-statsuscatalogRouter.post('/statuscatalog',createStatusCatalogController);
+statsuscatalogRouter.post('/statuscatalog',zValidator('json', StatusCatalogValidator),createStatusCatalogController);
 statsuscatalogRouter.get('/statuscatalog/:id',getStatusCatalogByIdController);
-statsuscatalogRouter.put('/statuscatalog/:id',updateStatusCatalogController);
+statsuscatalogRouter.put('/statuscatalog/:id',zValidator('json', StatusCatalogValidator),updateStatusCatalogController);
 statsuscatalogRouter.delete('/statuscatalog/:id',deleteStatusCatalogController);
 
 

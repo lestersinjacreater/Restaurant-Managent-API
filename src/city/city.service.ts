@@ -32,3 +32,13 @@ export const deleteCityByIdService = async (id: number) => {
   await db.delete(CityTable).where(eq(CityTable.city_id, id)); // Deleting the city with the specified ID
   return "City deleted successfully"; // Returning success message
 }
+
+//get city restaurants
+export const getCityRestaurantsService = async (id: number) => {
+  return await db.query.CityTable.findFirst({
+    where: eq(CityTable.city_id, id),
+    with: {
+      restaurants: true
+    }
+  });
+}

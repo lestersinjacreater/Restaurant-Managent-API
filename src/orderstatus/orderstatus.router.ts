@@ -1,9 +1,20 @@
 import{Hono} from 'hono';
+import { zValidator } from '@hono/zod-validator';
 import {getOrderStatusController,getOrderStatusByIdController,createOrderStatusController,updateOrderStatusController} from './orderstatus.controller';
-export const orderSRouter = new Hono();
+export const orderStatusRouter = new Hono();
+import { OrderStatusValidator } from '../validator';
 
-orderSRouter.get('/orderstatus',getOrderStatusController);
-orderSRouter.post('/orderstatus',createOrderStatusController);
-orderSRouter.get('/orderstatus/:id',getOrderStatusByIdController);
-orderSRouter.put('/orderstatus/:id',updateOrderStatusController);
+orderStatusRouter.get('/orderstatus',getOrderStatusController);
+orderStatusRouter.post('/orderstatus',  zValidator('json', OrderStatusValidator, (result, c) => {
+    if (!result.success) {
+        return c.json(result.error, 400)
+    }
+}),createOrderStatusController);
+orderStatusRouter.get('/orderstatus/:id',getOrderStatusByIdController);
+orderStatusRouter.put('/orderstatus/:id', zValidator('json', OrderStatusValidator, (result, c) => {
+    if (!result.success) {
+        return c.json(result.error, 400)
+    }
+}),updateOrderStatusController);
+orderStatusRouter.delete('/orderstatus/:id',updateOrderStatusController);
 

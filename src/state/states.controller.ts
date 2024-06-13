@@ -1,5 +1,5 @@
 import { Context } from "hono";
-import { getstatesService, getStateByIdService, createStateService, updateStateByidService, deleteStateByIdService  } from "./state.service";
+import { getstatesService, getStateByIdService, createStateService, updateStateByidService, deleteStateByIdService,getStateCitiesService  } from "./state.service";
 
 
 //get all states
@@ -79,4 +79,23 @@ export const deleteStateController = async (c: Context) => {
     } catch (error: any) {
         return c.json({ error: error?.message }, 500);
     }
+};
+
+//get state-state
+export const getStateCitiesController = async (c: Context) => {
+    try {
+        const id = parseInt(c.req.param("id"));
+        if (isNaN(id)) {
+            return c.text("Invalid id", 400);
+        }
+        const cities = await getStateCitiesService(id);
+        if (cities == null) {
+            return c.text("No cities found", 404);
+        }
+        return c.json(cities, 200);
+    } catch (error: any) {
+        return c.json({ error: error?.message }, 500);
+
+    }
+
 };

@@ -1,3 +1,4 @@
+
 import { eq } from "drizzle-orm"; // Importing the "eq" function for querying
 import db from "../drizzle/db"; // Importing the database connection
 import { CategoryTable } from "../drizzle/schema"; // Importing the CategoryTable schema
@@ -32,5 +33,3 @@ export const deleteCategoryByIdService = async (id: number) => {
   await db.delete(CategoryTable).where(eq(CategoryTable.category_id, id)); // Deleting the category with the specified ID
   return "Category deleted successfully";
 }
-
-

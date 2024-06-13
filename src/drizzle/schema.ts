@@ -14,9 +14,7 @@ export const CityTable = pgTable("city", {
   city_id: serial("id").primaryKey(),
   name: varchar("name", { length: 255 }).notNull(),
   state_id: serial("state_id").notNull().references (() => StateTable.state_id, ),  // Relationship field
-  address : text("address").notNull(),
-  state : varchar("state").notNull(),
-  restaurant: text("restaurant").notNull(),
+
 });
 
 // City Relation
@@ -38,7 +36,7 @@ export const StateTable = pgTable("state", {
   state_id: serial("id").primaryKey(),
   name: varchar("name", { length: 255 }).notNull(),
   code: varchar("code", { length: 10 }).notNull(),
-  city : text("city").notNull(),
+ 
 
   
 });
@@ -55,8 +53,6 @@ export const RestaurantOwnerTable = pgTable("restaurant_owner", {
   restaurant_owner_id: serial("id").primaryKey(),
   restaurant_id: serial("restaurant_id").notNull() .references(() => RestaurantTable.restaurant_id) , // Relationship field
   owner_id: serial("owner_id").notNull() .references(() => UsersTable.user_id)  , // Relationship field
-  users : text("users").notNull(),
-  restorant : text("restorant").notNull(),
   
   
 });
@@ -81,20 +77,14 @@ export const UsersTable = pgTable("users", {
   user_id: serial("id").primaryKey(),
   name: varchar("name", { length: 255 }).notNull(),
   contact_phone: varchar("contact_phone", { length: 20 }).notNull(),
-  phone_verified: boolean("phone_verified").notNull().default(false),
+  phone_verified: boolean("phone_verified").notNull(),
   email: varchar("email", { length: 255 }).notNull().unique(),
-  email_verified: boolean("email_verified").notNull().default(false),
+  email_verified: boolean("email_verified").notNull(),
   confirmation_code: varchar("confirmation_code", { length: 255 }).notNull(),
   password: text("password").notNull(),
   created_at: timestamp("created_at").defaultNow(),
   updated_at: timestamp("updated_at").defaultNow(),
-  address : text("address").notNull(),
-  comment : text("comment").notNull(),
-  driver : text("driver").notNull(),
-  orders : text("orders").notNull(),
-  restorant_owner : text("restorant_owner").notNull(),
-
-  
+ 
 });
 
 // User Relations
@@ -122,8 +112,7 @@ export const CommentTable = pgTable("comment", {
   is_praise: boolean("is_praise").notNull().default(false),
   created_at: timestamp("created_at").defaultNow(),
   updated_at: timestamp("updated_at").defaultNow(),
-  orders: text("orders").notNull(),
-  users: text("users").notNull(),
+ 
 
   
 });
@@ -154,8 +143,6 @@ export const DriverTable = pgTable("driver", {
   delivering: boolean("delivering").notNull().default(false),
   created_at: timestamp("created_at").defaultNow(),
   updated_at: timestamp("updated_at").defaultNow(),
-  users: text("users").notNull(),
-  orders : text("orders").notNull(),
 
   
 });
@@ -181,9 +168,7 @@ export const AddressTable = pgTable("address", {
   city_id: integer("city_id").notNull() .references(() => CityTable.city_id) ,  // Relationship field
   created_at: timestamp("created_at").defaultNow(),
   updated_at: timestamp("updated_at").defaultNow(),
-  city : text("city").notNull(),
-  users : text("users").notNull(),
-  ordes : text("orders").notNull(),
+ 
 
 
   
@@ -213,10 +198,7 @@ export const RestaurantTable = pgTable("restaurant", {
   city_id: serial("city_id").notNull() .references(() => CityTable.city_id),  // Relationship field
   created_at: timestamp("created_at").defaultNow(),
   updated_at: timestamp("updated_at").defaultNow(),
-  menu_items: text("menu_items").notNull(),
-  orders: text("orders").notNull(),
-  city: text("city").notNull(),
-  restaurant_owner: text("restorant_owner").notNull(),
+  
 
 });
 
@@ -248,12 +230,9 @@ export const MenuItemTable = pgTable("menu_item", {
   active: boolean("active").notNull().default(true),
   created_at: timestamp("created_at").defaultNow(),
   updated_at: timestamp("updated_at").defaultNow(),
-  restorant : text("restorant").notNull(),
-  category : text("category").notNull(),
-  restaurant: text("restorant").notNull(),
-  order_menu_items: text("order_menu_items").notNull(),
-
   
+
+
 });
 
 // MenuItem Relations
@@ -276,7 +255,7 @@ export const MenuItemRelations = relations(MenuItemTable, ({ one, many }) => ({
 export const CategoryTable = pgTable("category", {
   category_id: serial("id").primaryKey(),
   name: varchar("name", { length: 255 }).notNull(),
-  menu_items: text("menu_items").notNull(),
+  
 
 });
 
@@ -296,8 +275,7 @@ export const OrderMenuItemTable = pgTable("order_menu_item", {
   item_price: real("item_price").notNull(),
   price: real("price").notNull(),
   comment: text("comment"),
-  menu_item: text("menu_item").notNull(),
-  orders: text("orders").notNull(),
+ 
 
 
 });
@@ -321,9 +299,9 @@ export const OrderMenuItemRelations = relations(OrderMenuItemTable, ({ one }) =>
 export const OrdersTable = pgTable("orders", {
   order_id: serial("id").primaryKey(),
   restaurant_id: serial("restaurant_id").notNull() .references (() => RestaurantTable.restaurant_id, ),  // Relationship field
-  estimated_delivery_time: timestamp("estimated_delivery_time").notNull(),
+  estimated_delivery_time: timestamp("estimated_delivery_time"),
   actual_delivery_time: timestamp("actual_delivery_time"),
-  delivery_address_id: serial("delivery_address_id").notNull() .references (() => AddressTable.address_id, ),  // Relationship field
+  delivery_address_id: integer("delivery_address_id").notNull() .references (() => AddressTable.address_id, ),  // Relationship field
   user_id: serial("user_id").notNull()  .references (() => UsersTable.user_id, ),  // Relationship field
   driver_id: serial("driver_id").notNull() .references (() => DriverTable.driver_id, ),  // Relationship field
   price: real("price").notNull(),
@@ -332,13 +310,7 @@ export const OrdersTable = pgTable("orders", {
   comment: text("comment"),
   created_at: timestamp("created_at").defaultNow(),
   updated_at: timestamp("updated_at").defaultNow(),
-  coments: text("coments").notNull(),
-  order_menu_items: text("order_menu_items").notNull(),
-  ordder_status: text("order_status").notNull(),
-  address: text("address").notNull(),
-  driver: text("driver").notNull(),
-  restaurant: text("restorant").notNull(),
-  users: text("users").notNull(),
+  
 
   
 });
@@ -379,8 +351,7 @@ export const OrderStatusTable = pgTable("order_status", {
   order_id: serial("order_id").notNull()  .references (() => OrdersTable.order_id, ),  // Relationship field
   status_catelog_id: serial("status_catelog_id").notNull() .references (() => StatusCatalogTable.status_catalog_id, ),  // Relationship field
   created_at: timestamp("created_at").defaultNow(),
-  orders: text("orders").notNull(),
-  status_catalog: text("status_catalog").notNull(),
+  
 
 });
 
@@ -404,7 +375,7 @@ export const OrderStatusRelations = relations(OrderStatusTable, ({ one }) => ({
 export const StatusCatalogTable = pgTable("status_catalog", {
   status_catalog_id: serial("id").primaryKey(),
   name: varchar("name", { length: 255 }).notNull(),
-  order_status: text("order_status").notNull(),
+ 
 
 
 });
@@ -414,6 +385,28 @@ export const StatusCatalogTable = pgTable("status_catalog", {
 export const StatusCatalogRelations = relations(StatusCatalogTable, ({ many }) => ({
   orderStatus: many(OrderStatusTable)
 }));
+
+export const roleEnum = pgEnum("role", ["admin", "user"])
+
+
+export const AuthOnUsersTable = pgTable("auth_on_users", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull().references(() => UsersTable.user_id, { onDelete: "cascade" }),
+  password: varchar("password", { length: 100 }),
+  username: varchar("username", { length: 100 }),
+  role: roleEnum("role").default("user")
+});
+
+export const AuthOnUsersRelations = relations(AuthOnUsersTable, ({ one }) => ({
+  user: one(UsersTable, {
+      fields: [AuthOnUsersTable.userId],
+      references: [UsersTable.user_id]
+  })
+}));
+
+
+
+
 
 export type TSState = typeof StateTable.$inferInsert;
 export type TIState = typeof StateTable.$inferSelect;
@@ -457,7 +450,5 @@ export type TIOrderStatus = typeof OrderStatusTable.$inferSelect;
 export type TSStatusCatalog = typeof StatusCatalogTable.$inferInsert;
 export type TIStatusCatalog = typeof StatusCatalogTable.$inferSelect;
 
-
-
-
-
+export type TSAuthOnUsers = typeof AuthOnUsersTable.$inferInsert;
+export type TIAuthOnUsers = typeof AuthOnUsersTable.$inferSelect;

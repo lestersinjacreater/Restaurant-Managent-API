@@ -1,0 +1,493 @@
+
+//1STATE
+
+###create state
+POST http://localhost:3000/api/state
+Content-Type: application/json
+
+{
+  
+ "name": "egypt",
+  "code": "IL" 
+}
+
+###get all states
+GET http://localhost:3000/api/state
+
+### get state by id
+GET http://localhost:3000/api/state/13
+
+
+### update state by id
+PUT  http://localhost:3000/api/state/13
+Content-Type: application/json
+
+{
+  "name": "Taania"
+} 
+
+### delate state by id
+DELETE http://localhost:3000/api/state/3
+
+
+
+###get state cities
+GET http://localhost:3000/api/state/2/cities
+
+
+
+//2CITY
+
+### create city
+POST http://localhost:3000/api/cities
+Content-Type: application/json
+
+{
+    "name": "city18",
+     "state_id": 2
+}
+
+###get all cites
+GET http://localhost:3000/api/cities
+
+###get city by id
+GET http://localhost:3000/api/cities/7
+
+###update city by id
+PUT http://localhost:3000/api/cities/7
+Content-Type: application/json
+
+{
+  "name": "city19"
+}
+
+###delete city by id
+DELETE http://localhost:3000/api/cities/7
+
+###getcityrestaurants
+GET http://localhost:3000/api/cities/2/restaurants
+
+
+
+
+//3USER
+
+###create user
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "name": "lester sinja",
+  "contact_phone": "555-555-5555",
+  "phone_verified": true,
+  "email": "lestetsinjawatosia@gmail.com",
+  "email_verified": true,
+  "confirmation_code": "1234",
+  "password": "1234"
+}
+
+
+###get all users
+GET http://localhost:3000/api/users/
+
+###get user by id
+GET http://localhost:3000/api/users/63
+
+###update user by id
+PUT http://localhost:3000/api/users/63
+Content-Type: application/json
+
+{
+  "name": "lester sinja"
+}
+
+
+
+
+//4Adresss
+
+### create adresses
+POST http://localhost:3000/api/addresses
+Content-Type: application/json
+
+{
+  
+  "street_address_1": "123 Main St",
+  "street_address_2": "Apt 1",
+  "zip_code":  "62701",
+  "delivery_instructions":"drop by the door",
+  "user_id": 65,  
+  "city_id": 2 , 
+  "city":"Springfield",
+  "users":"test",
+  "orders":"test"
+}
+
+### get all adresses
+GET http://localhost:3000/api/addresses
+
+
+### get adresses by id
+GET http://localhost:3000/api/addresses/30
+
+### update adresses by id
+PUT http://localhost:3000/api/addresses/30
+Content-Type: application/json
+
+{
+  "delivery_instructions": "keep it warm"
+}
+
+### delete adresses by id
+DELETE http://localhost:3000/api/addresses/31
+
+
+
+//5CATEGORY
+
+### create category
+POST http://localhost:3000/api/categories
+Content-Type: application/json
+
+{
+  "name": "test",
+  "menu_items": "test"
+}
+
+### get all categories
+GET http://localhost:3000/api/categories
+
+### get category by id
+GET http://localhost:3000/api/categories/5
+
+### update category by id
+PUT http://localhost:3000/api/categories/5
+Content-Type: application/json
+
+{
+  "name": "delicacy"
+}
+
+### delete category by id
+DELETE http://localhost:3000/api/categories/5
+
+
+//6DRIVER
+###get all drivers
+GET http://localhost:3000/api/drivers
+
+### create driver
+POST http://localhost:3000/api/drivers
+Content-Type: application/json
+
+{
+  "car_make": "toyota",
+  "car_model": "corolla",
+  "car_year": 2021,
+  "user_id":64,
+  "online": true,
+  "delivering": true,
+  "users": "test",
+  "orders": "test"
+
+}
+
+### get driver by id
+GET http://localhost:3000/api/drivers/40
+
+
+### update driver by id
+PUT http://localhost:3000/api/drivers/38
+Content-Type: application/json
+
+{
+  "car_make": "tesla"
+}
+
+
+### delete driver by id
+DELETE http://localhost:3000/api/drivers/38
+
+
+//7MENUITEM
+
+### get all menu items
+GET http://localhost:3000/api/menuitems
+
+
+### create menu item
+POST http://localhost:3000/api/menuitems
+Content-Type: application/json
+
+{
+  "name": "test",
+  "restaurant_id": 7,
+  "category_id": 1,
+  "description": "test",
+  "ingredients": "test",
+  "price": 10.00,
+  "active": true,
+  "category": "test",
+  "restaurant": "test",
+  "order_menu_items": "test"
+}
+
+
+### get menu item by id
+GET http://localhost:3000/api/menuitems/2
+
+
+### update menu item by id
+PUT http://localhost:3000/api/menuitems/2
+Content-Type: application/json
+
+{
+  "name": "delicacy"
+}
+
+
+### delete menu item by id
+DELETE http://localhost:3000/api/menuitems/2
+
+//8ORDER
+
+### get all orders
+GET http://localhost:3000/api/orders
+
+### create new orders
+POST http://localhost:3000/api/orders
+Content-Type: application/json
+
+{
+  "restaurant_id": 7,
+  "estimated_delivery_time": "2021-09-01T12:00:00",
+  "actual_delivery_time": "2021-09-01T12:30:00",
+  "delivery_address_id": 30,
+  "user_id": 61,
+  "driver_id": 40,
+  "price": 10.00,
+  "discount": 3.00,
+  "final_price": 7.00,
+  "comment":"have a lovely meal"
+}
+
+
+### get order by id
+GET http://localhost:3000/api/orders/33
+
+
+### update order by id
+PUT http://localhost:3000/api/orders/33
+Content-Type: application/json
+
+{
+  "comment": "have a meal"
+}
+
+### delete order by id
+DELETE http://localhost:3000/api/orders/34
+
+
+
+//9ORDERMENUITEM
+
+### get all order menu items
+GET http://localhost:3000/api/ordermenuitems
+
+### create order_menu_item
+POST http://localhost:3000/api/ordermenuitems
+Content-Type: application/json
+
+{
+  "order_id": 33,
+  "menu_item_id": 1,
+  "quantity": 1,
+  "price": 10.00,
+  "item_price": 10.00,
+  "comment": "test"
+ 
+}
+
+
+### get order menu item by id
+GET http://localhost:3000/api/ordermenuitems/11
+
+
+### update order menu item by id
+PUT http://localhost:3000/api/ordermenuitems/11
+Content-Type: application/json
+
+{
+  "comment": "have a meal"
+}
+
+
+### delete order menu item by id
+DELETE http://localhost:3000/api/ordermenuitems/15
+
+
+
+
+//10ORDERSTATUS
+
+### get all order status
+GET http://localhost:3000/api/orderstatus
+
+### create order_status
+POST http://localhost:3000/api/orderstatus
+Content-Type: application/json
+
+{
+  "order_id": 35,
+  "status_catalog_id": 7,
+  "orders": "test",
+  "status_catalog": "test"
+ 
+}
+
+### get order status by id
+GET http://localhost:3000/api/orderstatus/11
+
+
+### update order status by id
+PUT http://localhost:3000/api/orderstatus/11
+Content-Type: application/json
+
+{
+  "order_id": 35
+
+}
+
+
+### delete order status by id
+DELETE http://localhost:3000/api/orderstatus/10
+
+
+
+
+//11RESTAURANT
+### get all restaurants
+GET http://localhost:3000/api/restaurants
+
+### create restaurant
+POST http://localhost:3000/api/restaurants
+Content-Type: application/json
+
+{
+  "name" : "test",
+  "street_address": "123 Main St",
+  "zip_code": "62701",
+  "city_id": 2
+  
+}
+
+#### get restaurant by id
+GET http://localhost:3000/api/restaurants/7
+
+
+### update restaurant by id
+PUT http://localhost:3000/api/restaurants/7
+Content-Type: application/json
+
+{
+  "name": "delicacy"
+}
+
+
+
+### delete restaurant by id
+DELETE http://localhost:3000/api/restaurants/13
+
+
+//12RESTAURANTOWNER
+
+### get all restaurant owners
+GET http://localhost:3000/api/restaurantowners
+
+### create restaurant_owner
+POST http://localhost:3000/api/restaurantowners
+Content-Type: application/json
+
+{
+  
+  "restaurant_id":4,
+  "owner_id": 64 , 
+  "users" : "test",
+  "restorant" : "test"
+}
+
+
+### get restaurant owner by id
+GET http://localhost:3000/api/restaurantowners/27
+
+
+### update restaurant owner by id
+PUT http://localhost:3000/api/restaurantowners/27
+Content-Type: application/json
+
+{
+  "restaurant_id": 4
+}
+
+
+
+### delete restaurant owner by id
+DELETE http://localhost:3000/api/restaurantowners/27
+
+
+
+//13STATUSCATALOG
+
+### get all status calalog
+GET http://localhost:3000/api/statuscatalog
+
+### create status calalog
+POST http://localhost:3000/api/statuscatalog
+Content-Type: application/json
+
+{
+  "name": "test"
+ 
+}
+
+### get status calalog by id
+GET http://localhost:3000/api/statuscatalog/7
+
+
+### update status calalog by id
+PUT http://localhost:3000/api/statuscatalog/7
+Content-Type: application/json
+
+{
+  "name": "delicacy"
+}
+
+### delete status calalog by id
+DELETE http://localhost:3000/api/statuscatalog/7
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

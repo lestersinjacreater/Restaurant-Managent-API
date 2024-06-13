@@ -54,9 +54,9 @@ export const updateDriverController = async (c: Context) => {
         const driver = await c.req.json();
 
         // search for user by id
-        const updatedDriver = await getDriverByIdService(id);
-        if (!updatedDriver) return c.text("Driver not found", 404);
-        await updateDriverByidService(id, driver);
+        let existingDriver = await getDriverByIdService(id);
+        if (existingDriver = undefined) return c.text("Driver not found", 404);
+        const updatedDriver = await updateDriverByidService(id, driver);
         return c.text("Driver updated successfully", 200);
     } catch (error: any) {
         return c.json({ error: error?.message }, 500);

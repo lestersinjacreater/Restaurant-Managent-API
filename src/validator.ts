@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { optional, z } from "zod";
 
 
 
@@ -6,186 +6,162 @@ import { z } from "zod";
 
 // City Validator
 export const CityValidator = z.object({
-  city_id: z.number().int().optional(),
-  name: z.string().max(255),
-  state_id: z.number().int(),
-  address: z.string(),
-  state: z.string(),
-  restaurant: z.string()
+  name: z.string().max(255).optional(),
+  state_id: z.number().optional(),
+
+  
 });
+
+
 
 // State Validator
 export const StateValidator = z.object({
-  state_id: z.number().int().optional(),
-  name: z.string().max(255),
-  code: z.string().max(10),
-  city: z.string()
+  name: z.string().max(255).optional(),
+  code: z.string().max(10).optional(),
 });
 
 // Restaurant Owner Validator
 export const RestaurantOwnerValidator = z.object({
-  restaurant_owner_id: z.number().int().optional(),
-  restaurant_id: z.number().int(),
-  owner_id: z.number().int(),
-  users: z.string(),
-  restorant: z.string()
+  restaurant_id: z.number().int().optional(),
+  owner_id: z.number().int().optional(),
+ 
 });
 
 // Users Validator
 
 
 export const UsersValidator = z.object({
-  user_id: z.number().int().optional(),
-  name: z.string().max(255),
-  contact_phone: z.string().max(20),
-  phone_verified: z.boolean().default(false),
-  email: z.string().email().max(255),
-  email_verified: z.boolean().default(false),
-  confirmation_code: z.string().max(255),
-  password: z.string(),
-  created_at: z.string().optional(),
-  updated_at: z.string().optional(),
-  address: z.string(),
-  comment: z.string(),
-  driver: z.string(),
-  orders: z.string(),
-  restorant_owner: z.string()
+  name: z.string().max(255).optional(),
+  contact_phone: z.string().max(20).optional(),
+  phone_verified: z.boolean().optional(),
+  email: z.string().email().max(255).optional(),
+  email_verified: z.boolean().optional(),
+  confirmation_code: z.string().max(255).optional(),
+
 });
+
+
 
 // Comment Validator
 export const CommentValidator = z.object({
-  comment_id: z.number().int().optional(),
-  order_id: z.number().int(),
-  user_id: z.number().int(),
-  comment_text: z.string(),
-  is_complaint: z.boolean().default(false),
-  is_praise: z.boolean().default(false),
-  created_at: z.string().optional(),
-  updated_at: z.string().optional(),
-  orders: z.string(),
-  users: z.string()
+  order_id: z.number().int().optional(),
+  user_id: z.number().int().optional(),
+  comment_text: z.string().optional(),
+  is_complaint: z.boolean().default(false).optional(),
+  is_praise: z.boolean().default(false).optional(),
+  created_at: z.string().optional().optional(),
+  updated_at: z.string().optional().optional(),
+ 
 });
 
 // Driver Validator
 export const DriverValidator = z.object({
-  driver_id: z.number().int().optional(),
-  car_make: z.string().max(255),
-  car_model: z.string().max(255),
-  car_year: z.number().int(),
-  user_id: z.number().int(),
-  online: z.boolean().default(false),
-  delivering: z.boolean().default(false),
-  created_at: z.string().optional(),
-  updated_at: z.string().optional(),
-  users: z.string(),
-  orders: z.string()
+  car_make: z.string().max(255).optional(),
+  car_model: z.string().max(255).optional(),
+  car_year: z.number().int().optional(),
+  user_id: z.number().int().optional(),
+  online: z.boolean().default(false).optional(),
+  delivering: z.boolean().default(false).optional(),
+  created_at: z.string().optional().optional(),
+  updated_at: z.string().optional().optional(),
+  
 });
 
 // Address Validator
 export const AddressValidator = z.object({
-  address_id: z.number().int().optional(),
-  street_address_1: z.string().max(255),
+  street_address_1: z.string().max(255).optional(),
   street_address_2: z.string().max(255).optional(),
-  zip_code: z.string().max(10),
-  delivery_instructions: z.string().optional(),
-  user_id: z.number().int(),
-  city_id: z.number().int(),
-  created_at: z.string().optional(),
-  updated_at: z.string().optional(),
-  city: z.string(),
-  users: z.string(),
-  orders: z.string()
+  zip_code: z.string().max(10).optional(),
+  delivery_instructions: z.string().optional().optional(),
+  user_id: z.number().int().optional(),
+  city_id: z.number().int().optional(),
+  created_at: z.string().optional().optional(),
+  updated_at: z.string().optional().optional(),
+ 
 });
 
 // Restaurant Validator
 export const RestaurantValidator = z.object({
-  restaurant_id: z.number().int().optional(),
-  name: z.string().max(255),
-  street_address: z.string().max(255),
-  zip_code: z.string().max(10),
-  city_id: z.number().int(),
+  name: z.string().max(255).optional(),
+  street_address: z.string().max(255).optional(),
+  zip_code: z.string().max(10).optional(),
+  city_id: z.number().int().optional(),
   created_at: z.string().optional(),
   updated_at: z.string().optional(),
-  menu_items: z.string(),
-  orders: z.string(),
-  city: z.string(),
-  restaurant_owner: z.string()
+  
 });
 
 // MenuItem Validator
 export const MenuItemValidator = z.object({
-  menu_item_id: z.number().int().optional(),
-  name: z.string().max(255),
-  restaurant_id: z.number().int(),
-  category_id: z.number().int(),
-  description: z.string(),
-  ingredients: z.string(),
-  price: z.number(),
-  active: z.boolean().default(true),
+  name: z.string().max(255).optional(),
+  restaurant_id: z.number().int().optional(),
+  category_id: z.number().int().optional(),
+  description: z.string().optional(),
+  ingredients: z.string().optional(),
+  price: z.number().optional(),
+  active: z.boolean().default(true).optional(),
   created_at: z.string().optional(),
   updated_at: z.string().optional(),
-  restaurant: z.string(),
-  category: z.string(),
-  order_menu_items: z.string()
+ 
 });
 
 // Category Validator
 export const CategoryValidator = z.object({
-  category_id: z.number().int().optional(),
-  name: z.string().max(255),
-  menu_items: z.string()
+  name: z.string().max(255).optional(),
+  
 });
 
 // OrderMenuItem Validator
 export const OrderMenuItemValidator = z.object({
-  order_menu_item_id: z.number().int().optional(),
-  order_id: z.number().int(),
-  menu_item_id: z.number().int(),
-  quantity: z.number().int(),
-  item_price: z.number(),
-  price: z.number(),
+  order_id: z.number().int().optional(),
+  menu_item_id: z.number().int().optional(),
+  quantity: z.number().int().optional(),
+  item_price: z.number().optional(),
+  price: z.number().optional(),
   comment: z.string().optional(),
-  menu_item: z.string(),
-  orders: z.string()
+  
 });
 
 // Orders Validator
 export const OrdersValidator = z.object({
-  order_id: z.number().int().optional(),
-  restaurant_id: z.number().int(),
-  estimated_delivery_time: z.string(),
+  restaurant_id: z.number().optional(),
+  estimated_delivery_time: z.string().optional(),
   actual_delivery_time: z.string().optional(),
-  delivery_address_id: z.number().int(),
-  user_id: z.number().int(),
-  driver_id: z.number().int(),
-  price: z.number(),
+  delivery_address_id: z.number().int().optional(),
+  user_id: z.number().int().optional(),
+  driver_id: z.number().int().optional(),
+  price: z.number().optional(),
   discount: z.number().optional().default(0),
-  final_price: z.number(),
+  final_price: z.number().optional(),
   comment: z.string().optional(),
   created_at: z.string().optional(),
-  updated_at: z.string().optional(),
-  comments: z.string(),
-  order_menu_items: z.string(),
-  order_status: z.string(),
-  address: z.string(),
-  driver: z.string(),
-  restaurant: z.string(),
-  users: z.string()
+  updated_at: z.string().optional()
 });
 
 // OrderStatus Validator
 export const OrderStatusValidator = z.object({
-  order_status_id: z.number().int().optional(),
-  order_id: z.number().int(),
-  status_catalog_id: z.number().int(),
-  created_at: z.string().optional(),
-  orders: z.string(),
-  status_catalog: z.string()
+  order_id: z.number().int().optional(),
+  status_catalog_id: z.number().int().optional(),
+  created_at: z.string().optional().optional(),
+  
 });
 
 // StatusCatalog Validator
 export const StatusCatalogValidator = z.object({
-  status_catalog_id: z.number().int().optional(),
-  name: z.string().max(255),
-  order_status: z.string()
+  name: z.string().max(255).optional(),
+ 
 });
+
+export const registerUserValidator = z.object({
+  userId: z.number().optional(),
+  username: z.string().optional(),
+  password: z.string().optional(),
+  role: z.string().optional(),
+})
+
+export const loginUservalidator= z.object({
+  username: z.string().optional(),
+  password: z.string().optional()
+})
+
+

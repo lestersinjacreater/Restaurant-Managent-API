@@ -1,3 +1,4 @@
+
 import { Context } from "hono";
 import { getCategoriesService,getCategoryByIdService,createCategoryService,updateCategoryByidService,deleteCategoryByIdService} from "./category.service";
 
@@ -76,4 +77,3 @@ export const deleteCategoryController = async (c: Context) => {
         return c.json({ error: error?.message }, 500);
     }
 };
-

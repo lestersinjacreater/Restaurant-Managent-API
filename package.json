@@ -4,10 +4,17 @@
     "gen": "drizzle-kit generate",
     "migrate": " tsx src/drizzle/migrate.ts",
     "studio": "drizzle-kit studio",
-    "push": " drizzle-kit generate && tsx src/drizzle/migrate.ts"
+    "push": " drizzle-kit generate && tsx src/drizzle/migrate.ts",
+    "pushneon": " drizzle-kit  push"
   },
   "dependencies": {
     "@hono/node-server": "^1.11.2",
+    "@hono/zod-validator": "^0.2.2",
+    "@neondatabase/serverless": "^0.9.3",
+    "@types/bcrypt": "^5.0.2",
+    "@types/pg": "^8.11.6",
+    "bcrypt": "^5.1.1",
+    "date-fns": "^3.6.0",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.31.0",
     "hono": "^4.4.2",
@@ -16,6 +23,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
+    "@neondatabase/serverless": "^0.9.3",
     "@types/node": "^20.11.17",
     "drizzle-kit": "^0.22.1",
     "tsx": "^4.7.1",

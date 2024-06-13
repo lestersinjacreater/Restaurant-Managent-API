@@ -16,10 +16,10 @@ export const getOrderByIdService = async (id: number): Promise< TSOrders| undefi
 }
 
 // Function to create a new order
-export const createOrderService = async (order: TIOrders) => {
-  await db.insert(OrdersTable).values(order); // Inserting the new order into the database
-  return "Order created successfully"; // Returning success message
-}
+//export const createOrderService = async (order: TIOrders) => {
+  //await db.insert(OrdersTable).values(order); // Inserting the new order into the database
+  //return "Order created successfully"; // Returning success message
+//}
 
 // Function to update a specific order by ID
 export const updateOrderByidService = async (id: number, order: TIOrders) => {
@@ -31,4 +31,9 @@ export const updateOrderByidService = async (id: number, order: TIOrders) => {
 export const deleteOrderByIdService = async (id: number) => {
   await db.delete(OrdersTable).where(eq(OrdersTable.order_id, id)); // Deleting the order with the specified ID
   return "Order deleted successfully"; // Returning success message
+}
+// Function to create a new order with estimated time of delivery and actual time of delivery
+export const createOrderService = async (order: TIOrders & { estimatedDeliveryTime: Date, actualDeliveryTime: Date }) => {
+  await db.insert(OrdersTable).values({ ...order, estimated_delivery_time: order.estimatedDeliveryTime, actual_delivery_time: order.actualDeliveryTime }); // Inserting the new order into the database
+  return "Order created successfully"; // Returning success message
 }

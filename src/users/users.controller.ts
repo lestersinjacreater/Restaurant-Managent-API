@@ -1,6 +1,6 @@
 import { Context } from "hono";
 import { getUsersService, getUserByIdService, createUserService, updateUserByidService, deleteUserByIdService  } from "./users.service";
-
+import bcrypt from "bcrypt";
 //get all users
 export const getUsersController = async (c: Context) => {
     try {
@@ -37,7 +37,10 @@ export const getUserByIdController = async (c: Context) => {
 export const createUserController = async (c: Context) => {
     try {
         const user = await c.req.json();
+        const hashedPassword = await bcrypt.hash(user.password, 10);
+        user.password = hashedPassword;
         const newUser = await createUserService(user);
+        
 
         if (!newUser) return c.text("User not created", 400);
         return c.json({ message: newUser }, 201);
