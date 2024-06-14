@@ -6,6 +6,7 @@ import { csrf } from 'hono/csrf';
 import { trimTrailingSlash } from 'hono/trailing-slash';
 import { timeout } from 'hono/timeout';
 import { HTTPException } from 'hono/http-exception';
+import { readFile } from 'fs/promises';
 
 // Importing routers from respective modules
 
@@ -44,9 +45,21 @@ const customTimeException = () =>
 app.use("time", timeout(10000, customTimeException));
 
 // Handling GET request to root endpoint '/'
-app.get('/', (c) => {
-  return c.text('Hello Hono!'); // Responding with 'Hello Hono!' text
+//app.get('/', (c) => {
+  //return c.text('Hello Hono!'); // Responding with 'Hello Hono!' text
+//});
+
+//defaultroute
+app.get('/', async (c) => {
+  try {
+    let html = await readFile('./index.html', 'utf-8');
+    return c.html(html);
+  } catch (error: any) {
+    return c.text(error.message,500);
+  }
 });
+
+
 
 // Custom routing for API endpoints
 app.route('/api', addressRouter); // Routing addressRouter under '/api'
