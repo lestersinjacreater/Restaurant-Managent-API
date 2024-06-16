@@ -3,6 +3,7 @@ import { zValidator } from '@hono/zod-validator';
 import {getStatusCatalogController,getStatusCatalogByIdController,createStatusCatalogController,updateStatusCatalogController,deleteStatusCatalogController} from './statsuscatalog.controller';
 export const statsuscatalogRouter = new Hono();
 import { StatusCatalogValidator } from '../validator';
+import { adminRoleAuth, userRoleAuth, bothRoleAuth } from '../middleware/bearAuth';
 
 statsuscatalogRouter.get('/statuscatalog',getStatusCatalogController);
 statsuscatalogRouter.post('/statuscatalog',zValidator('json', StatusCatalogValidator),createStatusCatalogController);

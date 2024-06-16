@@ -2,6 +2,7 @@ import{Hono} from 'hono';
 import {getAddressesController,getAddressByIdController,updateAddressController,createAddressController,deleteAddressController} from './address.controller';
 import { zValidator } from "@hono/zod-validator";
 import {AddressValidator} from "../validator";
+import { adminRoleAuth, userRoleAuth, bothRoleAuth } from '../middleware/bearAuth';
 
 export const addressRouter = new Hono();
 

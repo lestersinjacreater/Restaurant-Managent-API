@@ -2,6 +2,7 @@ import{Hono} from 'hono';
 import { zValidator } from '@hono/zod-validator';
 import {getMenuItemsController,getMenuItemByIdController,createMenuItemController,updateMenuItemController,deleteMenuItemController} from './menuitem.controller';
 export const menuitemRouter = new Hono();
+import { adminRoleAuth, userRoleAuth, bothRoleAuth } from '../middleware/bearAuth';
 import { MenuItemValidator } from '../validator';
 
 menuitemRouter.get('/menuitems',getMenuItemsController);

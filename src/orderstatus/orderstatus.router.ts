@@ -3,6 +3,7 @@ import { zValidator } from '@hono/zod-validator';
 import {getOrderStatusController,getOrderStatusByIdController,createOrderStatusController,updateOrderStatusController} from './orderstatus.controller';
 export const orderStatusRouter = new Hono();
 import { OrderStatusValidator } from '../validator';
+import { adminRoleAuth, userRoleAuth, bothRoleAuth } from '../middleware/bearAuth';
 
 orderStatusRouter.get('/orderstatus',getOrderStatusController);
 orderStatusRouter.post('/orderstatus',  zValidator('json', OrderStatusValidator, (result, c) => {

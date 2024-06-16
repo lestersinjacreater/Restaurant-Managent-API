@@ -3,6 +3,7 @@ import {getCategoriesController,getCategoryByIdController,createCategoryControll
 export const categoryRouter = new Hono();
 import { zValidator } from "@hono/zod-validator";
 import {CategoryValidator} from "../validator";
+import { adminRoleAuth, userRoleAuth, bothRoleAuth } from '../middleware/bearAuth';
 
 categoryRouter.get('/categories',getCategoriesController);
 categoryRouter.post('/categories', zValidator('json', CategoryValidator, (result, c) => {

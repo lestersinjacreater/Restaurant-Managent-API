@@ -3,6 +3,7 @@ import { zValidator } from '@hono/zod-validator';
 import {getRestaurantsController,getRestaurantByIdController,createRestaurantController,updateRestaurantController,deleteRestaurantController} from './restaurant.controller';
 export const restaurantRouter = new Hono();
 import { RestaurantValidator } from '../validator';
+import { adminRoleAuth, userRoleAuth, bothRoleAuth } from '../middleware/bearAuth';
 
 restaurantRouter.get('/restaurants',getRestaurantsController); 
 restaurantRouter.post('/restaurants',  zValidator('json', RestaurantValidator, (result, c) => {

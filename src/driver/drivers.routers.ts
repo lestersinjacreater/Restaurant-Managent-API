@@ -2,6 +2,7 @@ import{Hono} from 'hono';
 import { zValidator } from '@hono/zod-validator';
 import {getDriversController,getDriverByIdController,createDriverController,updateDriverController,deleteDriverController} from './driver.controller';
 export const driverRouter = new Hono();
+import { adminRoleAuth, userRoleAuth, bothRoleAuth } from '../middleware/bearAuth';
 import { DriverValidator } from '../validator';
 
 driverRouter.get('/drivers',getDriversController);

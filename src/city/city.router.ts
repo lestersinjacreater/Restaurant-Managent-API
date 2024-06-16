@@ -2,6 +2,7 @@ import{Hono} from 'hono';
 import { zValidator } from '@hono/zod-validator';
 import {getCitiesController,getCityByIdController,createCityController,updateCityController,deleteCityController,getCityRestaurantsController } from './city.controller';
 import { CityValidator } from '../validator';
+import { adminRoleAuth, userRoleAuth, bothRoleAuth } from '../middleware/bearAuth';
 export const cityRouter = new Hono();
 
 cityRouter.get('/cities',getCitiesController);

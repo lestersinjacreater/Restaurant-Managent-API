@@ -3,6 +3,7 @@ import { zValidator } from '@hono/zod-validator';
 import { getUsersController, createUserController, getUserByIdController, updateUserController, deleteUserController } from './users.controller';
 import { UsersValidator } from '../validator';
 export const userRouter = new Hono();
+import { adminRoleAuth, userRoleAuth, bothRoleAuth } from '../middleware/bearAuth';
 
 userRouter.get('/users', getUsersController);
 userRouter.post('/users', zValidator('json', UsersValidator, (result, c) => {

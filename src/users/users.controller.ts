@@ -1,6 +1,7 @@
 import { Context } from "hono";
 import { getUsersService, getUserByIdService, createUserService, updateUserByidService, deleteUserByIdService  } from "./users.service";
 import bcrypt from "bcrypt";
+import {sendRegistrationEmailTemplate} from "../mailer/mailer.function";
 //get all users
 export const getUsersController = async (c: Context) => {
     try {
@@ -34,20 +35,45 @@ export const getUserByIdController = async (c: Context) => {
 };
 
 // create user
+//export const createUserController = async (c: Context) => {
+   // try {
+       // const user = await c.req.json();
+        //const hashedPassword = await bcrypt.hash(user.password, 10);
+        //user.password = hashedPassword;
+        //const newUser = await createUserService(user);
+        
+
+        //if (!newUser) return c.text("User not created", 400);
+        //return c.json({ message: newUser }, 201);
+    //} catch (error: any) {
+       // return c.json({ error: error?.message }, 500);
+    //}
+//};
+
+// create user
 export const createUserController = async (c: Context) => {
     try {
         const user = await c.req.json();
-        const hashedPassword = await bcrypt.hash(user.password, 10);
-        user.password = hashedPassword;
         const newUser = await createUserService(user);
-        
 
-        if (!newUser) return c.text("User not created", 400);
-        return c.json({ message: newUser }, 201);
+        if (!newUser) {
+            return c.text("User not created", 400)
+        } else {
+            const userEmail: string = user.email
+            const eventName: string = 'for an account with Labamba Restaurant was a success!'
+            const userName: string = user.name
+            // send email to the user
+            const emailRes = await sendRegistrationEmailTemplate(userEmail, eventName, userName);
+            console.log('emailRes', emailRes);
+            return c.json({ message: newUser, emailRes }, 201);
+
+        }
+        // return c.json({ message: newUser }, 201);
     } catch (error: any) {
         return c.json({ error: error?.message }, 500);
     }
 };
+
 
 //  update user
 export const updateUserController = async (c: Context) => {

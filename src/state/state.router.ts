@@ -3,6 +3,7 @@ import { zValidator } from '@hono/zod-validator';
 import {getStatesController,createStateController,getStateByIdController,updateStateController,deleteStateController,getStateCitiesController} from './states.controller';
 import { StateValidator } from '../validator';
 export const stateRouter = new Hono();
+import { adminRoleAuth, userRoleAuth, bothRoleAuth } from '../middleware/bearAuth';
 
 
 stateRouter.get('/state', getStatesController);

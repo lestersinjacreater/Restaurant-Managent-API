@@ -55,7 +55,7 @@ export const sendRegistrationEmailTemplate = async (userEmail: string, eventName
     try {
         // Setting up the subject and message for the registration email
         const subject: string = `Confirmation: Registration for ${eventName}`;
-        const message: string = `Hello ${userName},\n\nWe are pleased to inform you that your registration for ${eventName} has been successfully processed. We hope you enjoy our services. Thank you for choosing us.\n\nBest regards,\nYour Company Name`;
+        const message: string = `Hello ${userName},\n\nWe are pleased to inform you that your registration for ${eventName} has been successfully processed. We hope you enjoy our services. Thank you for choosing us.\n\nBest regards,\nLabamba Restaurant Team\n\nThis is an automated email. Please do not reply.`;
 
         // Sending the email and awaiting the result
         const mailRes: string = await sendEmail(userEmail, subject, message);
