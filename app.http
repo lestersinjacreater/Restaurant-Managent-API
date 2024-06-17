@@ -126,6 +126,9 @@ Content-Type: application/json
   "role": "user"
  }
 
+### delete user by id
+DELETE http://localhost:3000/api/users/84
+
 
 
 
