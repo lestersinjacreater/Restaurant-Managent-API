@@ -90,6 +90,10 @@ Content-Type: application/json
 ###get all users
 GET http://localhost:3000/api/users/
 
+### delete user by id
+DELETE http://localhost:3000/api/users/98
+
+
 ###get user by id
 GET http://localhost:3000/api/users/63
 
@@ -127,7 +131,7 @@ Content-Type: application/json
  }
 
 ### delete user by id
-DELETE http://localhost:3000/api/users/94
+DELETE http://localhost:3000/api/users/95
 
 
 
